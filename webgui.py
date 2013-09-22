@@ -110,6 +110,9 @@ def show_stats(option):
     conn=sqlite3.connect(dbname)
     curs=conn.cursor()
 
+    if option is None:
+        option = str(24)
+
     curs.execute("SELECT timestamp,max(temp) FROM temps WHERE timestamp>datetime('now','-%s hour')" % option)
     rowmax=curs.fetchone()
     rowstrmax="{0}&nbsp&nbsp&nbsp{1}C".format(str(rowmax[0]),str(rowmax[1]))
